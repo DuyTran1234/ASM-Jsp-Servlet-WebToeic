@@ -14,6 +14,7 @@ public class SelectUserDAO {
 			ResultSet result = statement.executeQuery();
 			while(result.next()) {
 				user.setUserID(result.getInt("userID"));
+				user.setUserName(result.getString("userName"));
 				user.setPassword(result.getString("password"));
 				user.setUserType(result.getString("userType"));
 				user.setUserTypeID(result.getInt("userTypeID"));

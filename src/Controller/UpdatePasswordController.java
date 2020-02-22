@@ -14,11 +14,11 @@ import BEAN.User;
 import DAO.SelectUserDAO;
 import DAO.UpdateUserDAO;
 
-@WebServlet("/NormalManagementController")
-public class NormalManagementController extends HttpServlet {
+@WebServlet("/UpdatePasswordController")
+public class UpdatePasswordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public NormalManagementController() {
+    public UpdatePasswordController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,22 +28,14 @@ public class NormalManagementController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-		
-        User user = new User();
+		String presentPassword = request.getParameter("present-password");
+		String newPassword = request.getParameter("new-password");
+		String confirmPassword = request.getParameter("confirm-password");
 		HttpSession session = request.getSession(false);
-		user = (User)session.getAttribute("sessionUser");
-		
-		user.setFullName(request.getParameter("fullname"));
-		user.setPhoneNumber(request.getParameter("phone-number"));
-		user.setAddress(request.getParameter("address"));
-		
-		UpdateUserDAO.updateUser(user);
+		User user = (User)session.getAttribute("sessionUser");
+		UpdateUserDAO.updatePassword(user, newPassword, presentPassword, confirmPassword, request);
 		user = SelectUserDAO.selectUser(user);
-		
 		session.setAttribute("sessionUser", user);
-		request.setAttribute("msgUpdate", "Update thành công");
 		RequestDispatcher rd = request.getRequestDispatcher("./View/NormalManagement.jsp");
 		rd.forward(request, response);
 	}

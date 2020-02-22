@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/DAO/LoginDAO.java=UTF-8
 encoding//src/DAO/RegisterDAO.java=UTF-8
+encoding//src/DAO/UpdateUserDAO.java=UTF-8

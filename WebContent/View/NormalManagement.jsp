@@ -39,7 +39,31 @@
                         <div class="row">
 	                        <div class="col-12">
 	                        	<p style="color:red"><%=request.getAttribute("msgUpdate")!=null? request.getAttribute("msgUpdate") : "" %></p>
-	                            <input type="submit" value="Update" class="btn btn-primary btn-lg px-5">
+	                            <input type="submit" value="Update Info" class="btn btn-primary btn-lg px-5">
+	                        </div>
+                        </div>
+                        </form>
+                        <br><br>
+                        <form action="UpdatePasswordController" method="post">
+                    	<div class="row">
+                        
+	                          <div class="col-md-12 form-group">
+	                            <label for="username">Mật khẩu hiện tại</label>
+	                            <input type="password" name="present-password" class="form-control form-control-lg">
+	                          </div>
+	                          <div class="col-md-12 form-group">
+	                            <label for="email">Mật khẩu mới</label>
+	                            <input type="password" name="new-password" class="form-control form-control-lg">
+	                          </div>
+	                          <div class="col-md-12 form-group">
+	                            <label for="email">Xác nhận mật khẩu mới</label>
+	                            <input type="password" name="confirm-password" class="form-control form-control-lg">
+	                          </div>
+                        </div>
+                        <div class="row">
+	                        <div class="col-12">
+	                        	<p style="color:red"><%=request.getAttribute("msgUpdatePassword")!=null? request.getAttribute("msgUpdatePassword") : "" %></p>
+	                            <input type="submit" value="Update Password" class="btn btn-primary btn-lg px-5">
 	                        </div>
                         </div>
                         </form>
