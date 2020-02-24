@@ -25,13 +25,16 @@ public class AccountManagementForward extends HttpServlet {
 		User user = new User();
 		HttpSession session = request.getSession(false);
 		user = (User)session.getAttribute("sessionUser");
-
-		if(user.getUserTypeID() == 2) {
+		if(user == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("./View/Login.jsp");
+			rd.forward(request, response);
+		}
+		else if(user.getUserTypeID() == 2) {
 			RequestDispatcher rd = request.getRequestDispatcher("./View/NormalManagement.jsp");
 			rd.forward(request, response);
 		}
 		else if(user.getUserTypeID() == 1) {
-			RequestDispatcher rd = request.getRequestDispatcher("./View/Home.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("./View/AdminManagement.jsp");
 			rd.forward(request, response);
 		}
 	}

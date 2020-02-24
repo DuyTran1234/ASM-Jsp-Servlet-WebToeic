@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix = "c" uri = "http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quản lý tài khoản</title>
-
+<title>Admin</title>
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body>
 	<jsp:include page="Header.jsp"></jsp:include>
+	
 	<br><br><br><br><br>
 	<div class="site-wrap">
 		<div class="site-section">
@@ -67,16 +66,50 @@
 	                        </div>
                         </div>
                         </form>
+                        <br><br>
+                        <h4>Quản trị website</h4>
+                        <br>
+                        <div class="row">
+	                        <form action="GrammarLessionForward" method="POST" target="_blank">
+		                        <div class="col-12">
+		                            <input type="submit" value="Quản lý bài học phần ngữ pháp" class="btn btn-primary btn-lg px-5">
+		                        </div>
+	                        </form>
+                        </div>
+                        <br>
+                        <div class="row">
+	                        <div class="col-12">
+	                            <input type="submit" value="Quản lý bài học phần từ vựng" class="btn btn-primary btn-lg px-5">
+	                        </div>
+                        </div>
+                        <br>
+                        <div class="row">
+	                        <form action="" method="POST" target="_blank">
+	                        	<div class="col-12">
+	                            	<input type="submit" value="Quản lý bài tập đọc" class="btn btn-primary btn-lg px-5">
+	                        	</div>
+	                        </form>
+                        </div>
+                        <br>
+                        <div class="row">
+	                        <div class="col-12">
+	                            <input type="submit" value="Quản lý bài tập nghe" class="btn btn-primary btn-lg px-5">
+	                        </div>
+                        </div>
+                        <br>
+                        <div class="row">
+	                        <div class="col-12">
+	                            <input type="submit" value="Quản lý đề thi Toeic" class="btn btn-primary btn-lg px-5">
+	                        </div>
+                        </div>
                         
                     </div>
-                	</div>
-            	</div> 
-        	</div>
+                </div>
+            </div> 
+        </div>
 	
 	</div>
 	
 	<jsp:include page="Footer.jsp"></jsp:include>
-	
-	<!-- Script tag -->
 </body>
 </html>
