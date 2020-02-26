@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import BEAN.User;
 
 @WebServlet("/GrammarLessionForward")
 public class GrammarLessionForward extends HttpServlet {
@@ -19,8 +22,22 @@ public class GrammarLessionForward extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("./View/Admin/GrammarLessionManagement.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession(false);
+		User user = (User)session.getAttribute("sessionUser");
+		if(user != null) {
+			if(user.getUserTypeID() == 1) {
+				RequestDispatcher rd = request.getRequestDispatcher("./View/Admin/GrammarLessionManagement.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				RequestDispatcher rd = request.getRequestDispatcher("./View/Home.jsp");
+				rd.forward(request, response);
+			}
+		}
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("./View/Login.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
