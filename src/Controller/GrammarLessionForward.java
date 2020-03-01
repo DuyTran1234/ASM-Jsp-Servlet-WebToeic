@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BEAN.User;
+import DAO.GetGrammarLessionDAO;
 
 @WebServlet("/GrammarLessionForward")
 public class GrammarLessionForward extends HttpServlet {
@@ -24,8 +25,10 @@ public class GrammarLessionForward extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		User user = (User)session.getAttribute("sessionUser");
+		String listJSON = GetGrammarLessionDAO.getLession();
 		if(user != null) {
 			if(user.getUserTypeID() == 1) {
+				request.setAttribute("listJSON", listJSON);
 				RequestDispatcher rd = request.getRequestDispatcher("./View/Admin/GrammarLessionManagement.jsp");
 				rd.forward(request, response);
 			}

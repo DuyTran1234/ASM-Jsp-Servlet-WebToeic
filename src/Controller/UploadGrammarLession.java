@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import BEAN.Lession;
 import DAO.AddFileGrammarLession;
+import DAO.GetGrammarLessionDAO;
 
 @WebServlet("/UploadGrammarLession")
 public class UploadGrammarLession extends HttpServlet {
@@ -35,7 +36,6 @@ public class UploadGrammarLession extends HttpServlet {
 	    response.setContentType("text/html; charset=UTF-8");
         List<String> listLessionName = new ArrayList<>();
         List<File> listFile = AddFileGrammarLession.addFile(request, listLessionName);
-        String test = "";
         if(listFile != null) {
         	for(int i = 0; i < listFile.size(); i++) {
         		Lession lession = new Lession();
@@ -43,14 +43,15 @@ public class UploadGrammarLession extends HttpServlet {
         		lession.setContent(AddFileGrammarLession.getContentFile(listFile.get(i)));
         		lession.setDateToday(new Date());
         		if(AddFileGrammarLession.insertLession(lession)) {
+        			String listJSON = GetGrammarLessionDAO.getLession();
+        			request.setAttribute("listJSON", listJSON);
         			request.setAttribute("msgUploadFile", "Upload thành công");
         		}
         		else {
         			request.setAttribute("msgUploadFile", "Upload thất bại");
         		}
         	}
-        	request.setAttribute("Content", test);
-        }
+        }  
         RequestDispatcher rd = request.getRequestDispatcher("/View/Admin/GrammarLessionManagement.jsp");
         rd.forward(request, response);
 	}

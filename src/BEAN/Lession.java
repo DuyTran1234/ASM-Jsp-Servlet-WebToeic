@@ -15,6 +15,9 @@ public class Lession {
 		SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
 		this.dateToday = sdf.format(date);
 	}
+	public void setDateToday(String date) {
+		this.dateToday = date;
+	}
 	
 	public String getLessionName() {
 		return lessionName;
