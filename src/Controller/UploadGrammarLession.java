@@ -48,6 +48,8 @@ public class UploadGrammarLession extends HttpServlet {
         			request.setAttribute("msgUploadFile", "Upload thành công");
         		}
         		else {
+        			String listJSON = GetGrammarLessionDAO.getLession();
+        			request.setAttribute("listJSON", listJSON);
         			request.setAttribute("msgUploadFile", "Upload thất bại");
         		}
         	}

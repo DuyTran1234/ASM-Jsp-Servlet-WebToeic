@@ -78,19 +78,19 @@
 					       
 							<br>
 					        
-					        <form name="update-lession">
-	 							<div class="col-md-12 form-group">
-						            <h5>Sửa bài học</h5>
-						            <p>Nhập tên bài học cần sửa: </p>
-									<input type="text" name="edit-lession-name"> 
-					            </div>
-					            <br>		  					            
-					            <div class="col-12">		            	
-		                      		<input type="submit" value="Upload" class="btn btn-primary btn-lg px-5">	
-	                       		</div>					           
-					        </form>	
 					        
-					               					  	        
+	 						<div class="col-md-12 form-group">
+						    	<h5>Sửa bài học</h5>
+						        <p>Nhập tên bài học cần sửa: </p>
+								<input type="text" id="editLessionName"> 
+					        </div>
+					            <br>		  					            
+					        <div class="col-12">		            	
+		                      	<input type="button" value="Sửa" class="btn btn-primary btn-lg px-5" onclick="updateLessionAjax()">	
+	                       		<br>
+	                       		<div id="update-lession-ajax"></div>
+	                       	</div>					           
+					        					        					               					  	        
                 		</div>
                 	</div>
                 </div>
@@ -122,6 +122,20 @@
             console.info(page + ' (from event listening)');
         });
     });
+	</script>
+	<script>
+		function updateLessionAjax() {
+			var lessionName = document.getElementById("editLessionName").value;
+			var url = "UpdateGrammarLessionForward?lessionName=" + lessionName;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200) {
+					document.getElementById("update-lession-ajax").innerHTML = xhttp.responseText;
+				}
+			};
+			xhttp.open("POST", url, true);
+			xhttp.send();
+		}
 	</script>
 
 	

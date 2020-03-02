@@ -85,6 +85,7 @@ public class AddFileGrammarLession {
 			request.setAttribute("msgUploadFile", "File đã chọn không có định dạng docx, vui lòng chọn lại");
 			return false;
 		}
+		
 		return true;
 	}
 	private static boolean checkDuplicateFile(List<FileItem> items, HttpServletRequest request) {
