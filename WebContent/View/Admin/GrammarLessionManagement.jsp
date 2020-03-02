@@ -89,6 +89,7 @@
 		                      	<input type="button" value="Sửa" class="btn btn-primary btn-lg px-5" onclick="updateLessionAjax()">	
 	                       		<br>
 	                       		<div id="update-lession-ajax"></div>
+	                       		<p><%=request.getAttribute("msgUpdateFile")!= null? request.getAttribute("msgUpdateFile") : "" %></p>
 	                       	</div>					           
 					        					        					               					  	        
                 		</div>
