@@ -41,7 +41,7 @@ public class UpdateGrammarLessionForward extends HttpServlet {
 		else {
 			List<Lession> list = new ArrayList<>();
 			list = GetGrammarLessionDAO.getLession(list);
-			String lessionNameUpdate = request.getParameter("lessionName");
+			String lessionNameUpdate = request.getParameter("lessionNameOld");
 			for(int i = 0; i < list.size(); i++) {
 				if(lessionNameUpdate.equals(list.get(i).getLessionName())) {
 					request.setAttribute("lessionUpdate", list.get(i));

@@ -89,7 +89,7 @@
 		                      	<input type="button" value="Sửa" class="btn btn-primary btn-lg px-5" onclick="updateLessionAjax()">	
 	                       		<br>
 	                       		<div id="update-lession-ajax"></div>
-	                       		<p><%=request.getAttribute("msgUpdateFile")!= null? request.getAttribute("msgUpdateFile") : "" %></p>
+	                       		<p style="color:red"><%=request.getAttribute("msgUpdate")!= null? request.getAttribute("msgUpdate") : "" %></p>
 	                       	</div>					           
 					        					        					               					  	        
                 		</div>
@@ -126,8 +126,8 @@
 	</script>
 	<script>
 		function updateLessionAjax() {
-			var lessionName = document.getElementById("editLessionName").value;
-			var url = "UpdateGrammarLessionForward?lessionName=" + lessionName;
+			var lessionNameOld = document.getElementById("editLessionName").value;
+			var url = "UpdateGrammarLessionForward?lessionNameOld=" + lessionNameOld;
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if(this.readyState == 4 && this.status == 200) {
