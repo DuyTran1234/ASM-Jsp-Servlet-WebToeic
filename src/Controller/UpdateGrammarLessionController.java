@@ -1,9 +1,6 @@
 package Controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import BEAN.Lession;
 import BEAN.User;
-import DAO.AddFileGrammarLession;
 import DAO.GetGrammarLessionDAO;
 import DAO.UpdateLessionGrammarDAO;
 
@@ -45,46 +41,26 @@ public class UpdateGrammarLessionController extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else {
-			Lession lession = new Lession();
-			lession = 
-			
-			String lessionNameOld = lession.getLessionName();
-			
-//			Lession lessionNew = new Lession();
-//			List<String> listLessionName = new ArrayList<>();
-//			List<File> listFile = AddFileGrammarLession.addFile(request, listLessionName);
-//			if(listFile != null) {
-//				for(int i = 0; i < listFile.size(); i++) {
-//					lessionNew.setLessionName(listLessionName.get(i));
-//					lessionNew.setContent(AddFileGrammarLession.getContentFile(listFile.get(i)));
-//					if(UpdateLessionGrammarDAO.updateLessionGrammar(lessionNew, lessionOld.getLessionName())) {
-//						String listJSON = GetGrammarLessionDAO.getLession();
-//	        			request.setAttribute("listJSON", listJSON);
-//	        			request.setAttribute("msgUploadFile", null);
-//						request.setAttribute("msgUpdate", "Update thành công");
-//					}
-//					else {
-//						String listJSON = GetGrammarLessionDAO.getLession();
-//	        			request.setAttribute("listJSON", listJSON);
-//						request.setAttribute("msgUpdate", "Update thất bại");
-//					}
-//				}
-//			}
-//			else if(listFile == null && listLessionName != null) {
-//				for(int i = 0; i < listLessionName.size(); i++) {
-//					if(UpdateLessionGrammarDAO.updateLessionGrammar(listLessionName.get(i), lessionOld.getLessionName())) {
-//						String listJSON = GetGrammarLessionDAO.getLession();
-//	        			request.setAttribute("listJSON", listJSON);
-//						request.setAttribute("msgUpdate", "Update thành công");
-//					}
-//					else {					
-//						String listJSON = GetGrammarLessionDAO.getLession();
-//	        			request.setAttribute("listJSON", listJSON);
-//						request.setAttribute("msgUpdate", "Update thất bại");
-//					}
-//				}
-//			}
-			request.setAttribute("msgUpdate", lessionNameOld);
+			Lession lessionNew = new Lession();
+			lessionNew = UpdateLessionGrammarDAO.getData(request, lessionNew);
+			if(lessionNew.getContent() != null) {
+				UpdateLessionGrammarDAO.updateLessionGrammar(lessionNew, lessionNew.getLessionNameOld());
+				String listJSON = GetGrammarLessionDAO.getLession();
+    			request.setAttribute("listJSON", listJSON);
+    			request.setAttribute("msgUpdate", "Update thành công");
+			}
+			else if(lessionNew.getContent() == null && lessionNew.getLessionName() != null) {
+				UpdateLessionGrammarDAO.updateLessionGrammar(lessionNew.getLessionName(), lessionNew.getLessionNameOld());
+				String listJSON = GetGrammarLessionDAO.getLession();
+    			request.setAttribute("listJSON", listJSON);
+    			request.setAttribute("msgUpdate", "Update thành công");
+			}
+			else {
+				String listJSON = GetGrammarLessionDAO.getLession();
+    			request.setAttribute("listJSON", listJSON);
+    			request.setAttribute("msgUpdate", "Update thất bại");
+			}
+			request.setAttribute("msgUploadFile", null);
 			RequestDispatcher rd = request.getRequestDispatcher("./View/Admin/GrammarLessionManagement.jsp");
 			rd.forward(request, response);
 		}

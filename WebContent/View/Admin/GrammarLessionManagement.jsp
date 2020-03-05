@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Quản lý bài tập ngữ pháp</title>
+<script src="./bootstrap4/js/jquery.min.js"></script>
 <style>
 	table, tr, td{
 	  border: 1px solid black;
@@ -82,7 +83,7 @@
 	 						<div class="col-md-12 form-group">
 						    	<h5>Sửa bài học</h5>
 						        <p>Nhập tên bài học cần sửa: </p>
-								<input type="text" id="editLessionName"> 
+								<input type="text" id="editLessionName" name="lession-name-old-enter"> 
 					        </div>
 					            <br>		  					            
 					        <div class="col-12">		            	
@@ -91,6 +92,20 @@
 	                       		<div id="update-lession-ajax"></div>
 	                       		<p style="color:red"><%=request.getAttribute("msgUpdate")!= null? request.getAttribute("msgUpdate") : "" %></p>
 	                       	</div>					           
+					        <br><br>
+					        <form action="DeleteGrammarLessionController" method="POST">
+	 						<div class="col-md-12 form-group">
+						    	<h5>Xoá bài học</h5>
+						        <p>Nhập tên bài học cần xoá: </p>
+								<input type="text" name="lession-name-delete"> 
+					        </div>
+					            <br>		  					            
+					        <div class="col-12">		            	
+		                      	<input type="submit" value="Xoá" class="btn btn-primary btn-lg px-5">	
+	                       		<br>
+	                       		<%=request.getAttribute("msgDelete") != null? request.getAttribute("msgDelete") : "" %>                       		
+	                       	</div>
+	                       	</form>					        
 					        					        					               					  	        
                 		</div>
                 	</div>

@@ -4,10 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Lession {
-	private String lessionName;
-	private String content;
-	private String dateToday;
+	private String lessionName = null;
+	private String content = null;
+	private String dateToday = null;
+	private String lessionNameOld = null;
 	
+	public String getLessionNameOld() {
+		return lessionNameOld;
+	}
+	public void setLessionNameOld(String lessionNameOld) {
+		this.lessionNameOld = lessionNameOld;
+	}
 	public String getDateToday() {
 		return dateToday;
 	}
