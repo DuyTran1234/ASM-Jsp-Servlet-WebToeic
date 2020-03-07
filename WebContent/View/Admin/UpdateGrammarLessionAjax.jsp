@@ -12,7 +12,7 @@
 	<c:if test="${lessionUpdate != null}">
 		<form action="UpdateGrammarLessionController" method="POST" enctype="multipart/form-data">
 			<p>Tên bài: </p>
-			<input type="text" name="lession-name-old" value="${lessionUpdate.getLessionName()}" readonly="true">
+			<input type="text" name="lession-name-old" value="${lessionUpdate.getLessionName()}" readonly>
 			<p>Sửa tên bài:</p>
 			<input type="text" name="lession-name-update" value="${lessionUpdate.getLessionName()}">
 			<p>Sửa nội dung bài học:</p>

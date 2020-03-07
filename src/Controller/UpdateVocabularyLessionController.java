@@ -12,34 +12,40 @@ import javax.servlet.http.HttpSession;
 
 import BEAN.User;
 import DAO.GetVocabularyLessionDAO;
+import DAO.UpdateVocabularyLessionDAO;
 
-@WebServlet("/VocabularyLessionForward")
-public class VocabularyLessionForward extends HttpServlet {
+@WebServlet("/UpdateVocabularyLessionController")
+public class UpdateVocabularyLessionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public VocabularyLessionForward() {
+    public UpdateVocabularyLessionController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		User user = new User();
 		user = (User)session.getAttribute("sessionUser");
-		if(user != null && user.getUserTypeID() == 1) {
-			String listJSON = GetVocabularyLessionDAO.getLession();
-			if(listJSON != null) {
-				request.setAttribute("listJSON", listJSON);
+		if(user != null) {
+			if(UpdateVocabularyLessionDAO.updateVocabularyLession(request)) {
+				request.setAttribute("msgUpdateVocabulary", "Update thành công");
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("./View/Admin/VocabularyLessionManagement.jsp");
+			else {
+				request.setAttribute("msgUpdateVocabulary", "Update thất bại");
+			}
+			String listJSON = GetVocabularyLessionDAO.getLession();
+			request.setAttribute("listJSON", listJSON);
+			RequestDispatcher rd = request.getRequestDispatcher("/View/Admin/VocabularyLessionManagement.jsp");
 			rd.forward(request, response);
 		}
 		else {
-			RequestDispatcher rd = request.getRequestDispatcher("./View/Login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/View/Login.jsp");
 			rd.forward(request, response);
 		}
 	}

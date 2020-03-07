@@ -47,14 +47,16 @@
             		
                 	<div class="col-md-5">
                 		<div class="row">
-	                		<form method="POST" action="UploadGrammarLession" enctype="multipart/form-data" accept-charset="UTF-8">
-	 							<div class="col-md-12 form-group">
+                			<div class="col-md-12 form-group">
 	 								<div id="result-pagination">
 	 								</div>
-	 							</div>
-	 							<div class="col-md-12 form-group">
-	 								<ul class="pagination" id="pagination"></ul>
-	 							</div>
+	 								<br>
+	 								<div class="col-md-12 form-group">
+	 									<ul class="pagination" id="pagination"></ul>
+	 								</div>
+	 							</div> 	
+	                		<form method="POST" action="UploadGrammarLession" enctype="multipart/form-data" accept-charset="UTF-8">
+	 													
 	 							<br><br>
 	 							<div class="col-md-12 form-group">
 						            <h5>Thêm file bài học ngữ pháp (*Chỉ sử dụng file .docx)</h5>
@@ -119,6 +121,7 @@
 	<script src="./bootstrap4/js/jquery.min.js"></script>
     <script src="./bootstrap4/js/bootstrap.min.js"></script>
     <script src="./bootstrap4/js/jquery.twbsPagination.js" type="text/javascript"></script>
+    
 	<script type="text/javascript">
     $(function () {
     	var list = <%=request.getAttribute("listJSON")%>;

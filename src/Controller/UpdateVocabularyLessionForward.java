@@ -11,35 +11,37 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BEAN.User;
-import DAO.GetVocabularyLessionDAO;
+import DAO.UpdateVocabularyLessionDAO;
 
-@WebServlet("/VocabularyLessionForward")
-public class VocabularyLessionForward extends HttpServlet {
+@WebServlet("/UpdateVocabularyLessionForward")
+public class UpdateVocabularyLessionForward extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public VocabularyLessionForward() {
+
+    public UpdateVocabularyLessionForward() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession(false);
 		User user = new User();
 		user = (User)session.getAttribute("sessionUser");
-		if(user != null && user.getUserTypeID() == 1) {
-			String listJSON = GetVocabularyLessionDAO.getLession();
-			if(listJSON != null) {
-				request.setAttribute("listJSON", listJSON);
+		if(user != null) {
+			String lessionNameOld = request.getParameter("lessionName");
+			if(UpdateVocabularyLessionDAO.checkExistsLessionName(lessionNameOld)) {
+				request.setAttribute("lessionNameOld", lessionNameOld);
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("./View/Admin/VocabularyLessionManagement.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/View/Admin/UpdateVocabularyLessionAjax.jsp");
 			rd.forward(request, response);
 		}
 		else {
-			RequestDispatcher rd = request.getRequestDispatcher("./View/Login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/View/Login.jsp");
 			rd.forward(request, response);
 		}
 	}
