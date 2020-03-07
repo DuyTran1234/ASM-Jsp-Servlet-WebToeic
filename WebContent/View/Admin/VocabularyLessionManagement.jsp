@@ -81,6 +81,16 @@
 							<div class="col-md-12 form-group">
 								<p style="color:red"><%=request.getAttribute("msgUpdateVocabulary")!=null? request.getAttribute("msgUpdateVocabulary") : "" %></p>
 							</div>
+							
+							<div class="col-md-12 form-group">
+								<p>Nhập tên bài học cần xoá:</p>
+								<input type="text" id="lession-name-delete"><br><br>
+								<input type="button" class="btn btn-primary btn-lg px-5" value="Xoá bài học" onclick="ajaxDeleteLession()">
+							</div>
+							<div class="col-md-12 form-group">
+								<div id="result-ajax-delete"></div> 
+							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -129,7 +139,21 @@
 			xhttp.send();
 		}
 	</script>
-
+	
+	<script>
+		function ajaxDeleteLession() {
+			var xhttp = new XMLHttpRequest();
+			var lessionName = document.getElementById("lession-name-delete").value;
+			var url = "DeleteVocabularyLessionController?lessionName=" + lessionName;
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200) {
+					document.getElementById("result-ajax-delete").innerHTML = xhttp.responseText;
+				}
+			};
+			xhttp.open("POST", url, true);
+			xhttp.send();
+		}
+	</script>
 
 	<jsp:include page="/View/Footer.jsp"></jsp:include>
 </body>

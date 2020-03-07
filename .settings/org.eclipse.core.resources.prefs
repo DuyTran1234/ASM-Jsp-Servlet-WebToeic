@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/Controller/DeleteGrammarLessionController.java=UTF-8
+encoding//src/Controller/DeleteVocabularyLessionController.java=UTF-8
 encoding//src/Controller/InsertVocabularyGrammarController.java=UTF-8
 encoding//src/Controller/UpdateGrammarLessionController.java=UTF-8
 encoding//src/Controller/UpdateVocabularyLessionController.java=UTF-8

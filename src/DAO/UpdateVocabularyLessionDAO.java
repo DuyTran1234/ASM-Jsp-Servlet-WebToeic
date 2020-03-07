@@ -131,7 +131,7 @@ public class UpdateVocabularyLessionDAO {
 		return lession;
 	}
 
-	private static boolean checkLessionNameInDatabase(String lessionNameNew) {
+	public static boolean checkLessionNameInDatabase(String lessionNameNew) {
 		String sql = "select * from vocabulary_lession where lessionName = ?";
 		try {
 			PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
