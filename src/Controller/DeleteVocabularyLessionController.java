@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import BEAN.User;
 import DAO.DeleteVocabularyLessionDAO;
+import DAO.GetVocabularyLessionDAO;
 import DAO.UpdateVocabularyLessionDAO;
 
 @WebServlet("/DeleteVocabularyLessionController")
@@ -48,6 +49,8 @@ public class DeleteVocabularyLessionController extends HttpServlet {
 			else {
 				request.setAttribute("msgDeleteVocabulary", "Không tồn tại tên bài học");
 			}
+			String listJSON = GetVocabularyLessionDAO.getLession();
+			request.setAttribute("listJSON", listJSON);
 			RequestDispatcher rd = request.getRequestDispatcher("/View/Admin/DeleteVocabularyLessionAjax.jsp");
 			rd.forward(request, response);
 		}

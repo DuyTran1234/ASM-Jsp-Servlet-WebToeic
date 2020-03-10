@@ -86,7 +86,7 @@
                         </div>
                         <br>
                         <div class="row">
-	                        <form action="" method="POST" target="_blank">
+	                        <form action="ReadingExerciseForward" method="POST" target="_blank">
 	                        	<div class="col-12">
 	                            	<input type="submit" value="Quản lý bài tập đọc" class="btn btn-primary btn-lg px-5">
 	                        	</div>
