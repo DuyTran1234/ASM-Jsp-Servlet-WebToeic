@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BEAN.User;
+import DAO.InsertReadingExerciseDAO;
 
 @WebServlet("/InsertReadingExerciseController")
 public class InsertReadingExerciseController extends HttpServlet {
@@ -31,11 +32,13 @@ public class InsertReadingExerciseController extends HttpServlet {
 		User user = new User();
 		user = (User)session.getAttribute("sessionUser");
 		if(user != null && user.getUserTypeID() == 1) {
-			
+			if(!InsertReadingExerciseDAO.insertReadingExercise(request)) {
+				request.setAttribute("msgInsertReadingExercise", "Upload thất bại");
+			}
+			request.getRequestDispatcher("/View/Admin/ReadingExerciseManagement.jsp").forward(request, response);
 		}
 		else {
-			RequestDispatcher rd = request.getRequestDispatcher("/View/Login.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("/View/Login.jsp").forward(request, response);
 		}
 	}
 

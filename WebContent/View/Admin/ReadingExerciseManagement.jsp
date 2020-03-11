@@ -51,7 +51,7 @@
                 		               	
                 		    <div class="col-md-12 form-group">
                 				<form action="InsertReadingExerciseController" method="POST" enctype="multipart/form-data">
-                					<h5>Thêm file bài tập đọc (*Chỉ sử dụng file .xls)</h5>
+                					<h5>Thêm file bài tập đọc (*Chỉ sử dụng file .xls hoặc .xlsx)</h5>
                 					<table id="fileTable">
 						            	<tr>
 						            		<td><p>Tên chủ đề bài tập:</p><input type="text" name="lessionID[0]"></td>
@@ -62,7 +62,8 @@
 						            </table>  
 						            <br/>
 						            <input id="addFile" type="button" value="Add File"/><br><br>
-						            <input type="submit" value="Upload" class="btn btn-primary btn-lg px-5">          				
+						            <input type="submit" value="Upload" class="btn btn-primary btn-lg px-5"><br>
+						            <p style="color:red"><%=request.getAttribute("msgInsertReadingExercise")!=null? request.getAttribute("msgInsertReadingExercise") : "" %></p>       				
                 				</form>
                 			</div>	
 
