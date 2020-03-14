@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BEAN.User;
+import DAO.GetReadingExerciseDAO;
 
 @WebServlet("/ReadingExerciseForward")
 public class ReadingExerciseForward extends HttpServlet {
@@ -30,6 +31,10 @@ public class ReadingExerciseForward extends HttpServlet {
 		User user = new User();
 		user = (User)session.getAttribute("sessionUser");
 		if(user != null && user.getUserTypeID() == 1) {
+			String valueJSON = GetReadingExerciseDAO.getValueJSON();
+			String nameJSON = GetReadingExerciseDAO.getNameJSON();
+			request.setAttribute("listJSON-value", valueJSON);
+			request.setAttribute("listJSON-name", nameJSON);
 			RequestDispatcher rd = request.getRequestDispatcher("/View/Admin/ReadingExerciseManagement.jsp");
 			rd.forward(request, response);
 		}

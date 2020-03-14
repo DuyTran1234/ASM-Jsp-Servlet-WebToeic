@@ -48,8 +48,7 @@
                 	<div class="col-md-5">
                 		<div class="row">
                 			<div class="col-md-12 form-group">
-	 								<div id="result-pagination">
-	 								</div>
+	 								<div id="result-pagination"></div>								
 	 								<br>
 	 								<div class="col-md-12 form-group">
 	 									<ul class="pagination" id="pagination"></ul>
@@ -134,7 +133,7 @@
             onPageClick: function (event, page) {
             	var result = "<table>" + "<tr>" + "<th>Lession Name</th>" + "<th>Content</th>" + "<th>Date</th>"+ "</tr>";
             	result = result + "<tr>" + "<td>" + list[page-1].lessionName + "</td>"+ "<td>" + list[page-1].content + "</td>"+ "<td>" + list[page-1].dateToday + "</td>"+ "</tr>";
-         		result = result + "</table>"
+         		result = result + "</table>";
          	document.getElementById("result-pagination").innerHTML = result;
             }
         }).on('page', function (event, page) {

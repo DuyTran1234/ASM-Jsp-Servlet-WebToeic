@@ -46,7 +46,11 @@
                 		<div class="row">
                 		             		
                 			<div class="col-md-12 form-group">
-                				
+                				<div id="result-pagination"></div> 								
+	 							<br>
+                				<div class="col-md-12 form-group">
+	 								<ul class="pagination" id="pagination"></ul>
+	 							</div>
                 			</div>
                 		               	
                 		    <div class="col-md-12 form-group">
@@ -78,6 +82,35 @@
 	
 	<!-- Script -->
 	<script src="./bootstrap4/js/jquery.min.js"></script>
+    <script src="./bootstrap4/js/bootstrap.min.js"></script>
+    <script src="./bootstrap4/js/jquery.twbsPagination.js" type="text/javascript"></script>
+	 
+	 
+	<script type="text/javascript">
+    $(function () {
+    	var listValue = <%=request.getAttribute("listJSON-value")%>;
+    	var listName = <%=request.getAttribute("listJSON-name")%>;
+    	var total = listName.length;
+    	   	
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: total,
+            visiblePages: 3,
+            onPageClick: function (event, page) {
+            	var result = "<table>" + "<tr>" + "<th>ExerciseID</th>" + "<th>ExerciseName</th>" + "<th>QuesionID</th>" + "<th>QuestionContent</th>" + "<th>OptionA</th>" + "<th>OptionB</th>" + "<th>OptionC</th>" + "<th>OptionD</th>" + "<th>result</th>" + "<th>date</th>" + "</tr>";
+            	for(var i = 0; i < listValue.length; i++) {
+            		if(listName[page] == listValue[i].exerciseName) {
+            			result = result + "<tr>" + "<td>" + list[i].exerciseID + "</td>"+ "<td>" + list[i].exerciseName + "</td>"+ "<td>" + list[i].questionID + "</td>"+ "<td>" + list[i + "</td>" + "<td>" + list[i].optionA + "</td>" + "<td>" + list[i].optionB + "</td>" + "<td>" + list[i].optionC + "</td>" + "<td>" + list[i].optionD + "</td>" + "<td>" + list[i].result + "</td>" + "<td>" + list[i].date + "</td>" + "</tr>";                		
+            		}
+            	}
+            	result = result + "</table>";
+         		document.getElementById("result-pagination").innerHTML = result;
+            }
+        }).on('page', function (event, page) {
+            console.info(page + ' (from event listening)');
+        });
+    });
+	</script>
+	
 	
 	<jsp:include page="/View/Footer.jsp"></jsp:include>
 </body>

@@ -99,7 +99,7 @@
 	                <li>
 	                    <a href="ContactForward" class="nav-link text-left">Liên hệ</a>
 	                  </li>
-	              </ul>                                                                                                                                                                                                                                                                                          </ul>
+	              </ul>                                                                                                                                                                                                                                                                                          
 	            </nav>
 	          </div>
 	          <div class="ml-auto">
