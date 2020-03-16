@@ -14,6 +14,14 @@ public class Exercise {
 	private String optionD = null;
 	private String result;
 	private String date;
+	private String exerciseNameOld = null;
+	
+	public String getExerciseNameOld() {
+		return exerciseNameOld;
+	}
+	public void setExerciseNameOld(String exerciseNameOld) {
+		this.exerciseNameOld = exerciseNameOld;
+	}
 	
 	public String getDate() {
 		return this.date;

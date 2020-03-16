@@ -1,6 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/Controller/DeleteGrammarLessionController.java=UTF-8
-encoding//src/Controller/DeleteVocabularyLessionController.java=UTF-8
 encoding//src/Controller/InsertReadingExerciseController.java=UTF-8
 encoding//src/Controller/InsertVocabularyGrammarController.java=UTF-8
 encoding//src/Controller/UpdateGrammarLessionController.java=UTF-8
@@ -11,5 +10,6 @@ encoding//src/DAO/InsertReadingExerciseDAO.java=UTF-8
 encoding//src/DAO/InsertVocabularyLessionDAO.java=UTF-8
 encoding//src/DAO/LoginDAO.java=UTF-8
 encoding//src/DAO/RegisterDAO.java=UTF-8
+encoding//src/DAO/UpdateReadingExerciseDAO.java=UTF-8
 encoding//src/DAO/UpdateUserDAO.java=UTF-8
 encoding//src/DAO/UpdateVocabularyLessionDAO.java=UTF-8

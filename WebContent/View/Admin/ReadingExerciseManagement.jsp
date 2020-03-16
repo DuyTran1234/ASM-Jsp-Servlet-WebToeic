@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <script src="./bootstrap4/js/jquery.min.js"></script>
 <style>
-	table, tr, td{
+	table, tr, td, th{
 	  border: 1px solid black;
 	}
 </style>
@@ -70,8 +70,18 @@
 						            <p style="color:red"><%=request.getAttribute("msgInsertReadingExercise")!=null? request.getAttribute("msgInsertReadingExercise") : "" %></p>       				
                 				</form>
                 			</div>	
-
-
+							
+							<div class="col-md-12 form-group">
+								<h5>Sửa bài tập: </h5>
+								<p>Nhập tên bài học cần sửa: </p>
+								<input type="text" id="exercise-old-ajax"><br><br>
+								<input type="button" value="Sửa" class="btn btn-primary btn-lg px-5" onclick="updateExerciseAjax()">
+							</div>
+							
+							<div class="col-md-12 form-group">
+								<div id="update-exercise-ajax"></div>
+							</div>										
+                			
                 			
                 		</div>
 					</div>
@@ -97,9 +107,9 @@
             visiblePages: 3,
             onPageClick: function (event, page) {
             	var result = "<table>" + "<tr>" + "<th>ExerciseID</th>" + "<th>ExerciseName</th>" + "<th>QuesionID</th>" + "<th>QuestionContent</th>" + "<th>OptionA</th>" + "<th>OptionB</th>" + "<th>OptionC</th>" + "<th>OptionD</th>" + "<th>result</th>" + "<th>date</th>" + "</tr>";
-            	for(var i = 0; i < listValue.length; i++) {
-            		if(listName[page] == listValue[i].exerciseName) {
-            			result = result + "<tr>" + "<td>" + list[i].exerciseID + "</td>"+ "<td>" + list[i].exerciseName + "</td>"+ "<td>" + list[i].questionID + "</td>"+ "<td>" + list[i + "</td>" + "<td>" + list[i].optionA + "</td>" + "<td>" + list[i].optionB + "</td>" + "<td>" + list[i].optionC + "</td>" + "<td>" + list[i].optionD + "</td>" + "<td>" + list[i].result + "</td>" + "<td>" + list[i].date + "</td>" + "</tr>";                		
+            	for(var i = 0; i < listValue.length; i++) {      
+            		if(listName[page - 1] == listValue[i].exerciseName) {
+            			result = result + "<tr>" + "<td>" + listValue[i].exerciseID + "</td>"+ "<td>" + listValue[i].exerciseName + "</td>" + "<td>" + listValue[i].questionID + "</td>" + "<td>" + listValue[i].questionContent + "</td>" + "<td>" + listValue[i].optionA + "</td>" + "<td>" + listValue[i].optionB + "</td>" + "<td>" + listValue[i].optionC + "</td>" + "<td>" + listValue[i].optionD + "</td>" + "<td>" + listValue[i].result + "</td>" + "<td>" + listValue[i].date + "</td>" + "</tr>";                		          		
             		}
             	}
             	result = result + "</table>";
@@ -111,6 +121,20 @@
     });
 	</script>
 	
+	<script>
+		function updateExerciseAjax() {
+			var exerciseNameOld = document.getElementById("exercise-old-ajax").value;
+			var url = "UpdateReadingExerciseForward?exerciseNameOld=" + exerciseNameOld;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200) {
+					document.getElementById("update-exercise-ajax").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("POST", url, true);
+			xhttp.send();
+		}
+	</script>
 	
 	<jsp:include page="/View/Footer.jsp"></jsp:include>
 </body>

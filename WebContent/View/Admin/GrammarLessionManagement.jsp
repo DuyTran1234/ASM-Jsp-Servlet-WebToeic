@@ -7,7 +7,7 @@
 <title>Quản lý bài tập ngữ pháp</title>
 <script src="./bootstrap4/js/jquery.min.js"></script>
 <style>
-	table, tr, td{
+	table, tr, td, th{
 	  border: 1px solid black;
 	}
 </style>
