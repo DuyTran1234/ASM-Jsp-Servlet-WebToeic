@@ -47,7 +47,7 @@ public class GetReadingExerciseDAO {
 	}
 	public static String getNameJSON() {
 		List<String> listName = new ArrayList<>();
-		String sql = "select exerciseName from reading_exercise order by exerciseName ASC";
+		String sql = "select distinct exerciseName from reading_exercise order by exerciseName ASC";
 		try {
 			PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
 			ResultSet result = statement.executeQuery();

@@ -9,11 +9,11 @@
 </head>
 <body>
 	<% if(request.getAttribute("exercise-name-old") != null) { %>
-		<form action="UpdateReadingExerciseController" method="POST" enctype="multipart/data-form">
+		<form action="UpdateReadingExerciseController" method="POST" enctype="multipart/form-data">
 			<p>Tên bài tập:</p>
 			<input type="text" value="<%=request.getAttribute("exercise-name-old") %>" name="exercise-old" readonly><br>
-			<p>Sửa tên bài (* Nếu không cần sửa tên bài thì để trống) : </p>
-			<input type="text" name="exercise-new"><br>
+			<p>Sửa tên bài () : </p>
+			<input type="text" name="exercise-new" value="<%=request.getAttribute("exercise-name-old") %>"><br>
 			<p>Chọn file cập nhật (* Chỉ sử dụng file có định dạng .xls hoặc .xlsx)</p>
 			<input type="file" name="my-file"><br><br>
 			<input type="submit" value="Cập nhật" class="btn btn-primary btn-lg px-5">			

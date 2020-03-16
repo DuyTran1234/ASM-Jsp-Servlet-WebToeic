@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,8 +45,59 @@ public class UpdateReadingExerciseDAO {
 		}
 		return false;
 	}
+	public static boolean updateReadingExercise(HttpServletRequest request) throws UnsupportedEncodingException {
+		List<Exercise> listExercise = getListExercise(request);
+		if(listExercise == null) {
+			return false;
+		}
+		else {
+			for(int i = 0; i < listExercise.size(); i++) {
+				String sql = "insert into reading_exercise (exerciseName,questionID,questionContent,optionA,optionB,optionC,optionD,result,date) values(?,?,?,?,?,?,?,?,?)";
+				try {
+					PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
+					statement.setString(1, listExercise.get(i).getExerciseName());
+					statement.setString(2, listExercise.get(i).getQuestionID());
+					statement.setString(3, listExercise.get(i).getQuestionContent());
+					statement.setString(4, listExercise.get(i).getOptionA());
+					statement.setString(5, listExercise.get(i).getOptionB());
+					statement.setString(6, listExercise.get(i).getOptionC());
+					statement.setString(7, listExercise.get(i).getOptionD());
+					statement.setString(8, listExercise.get(i).getResult());
+					statement.setString(9, listExercise.get(i).getDate());
+					statement.executeUpdate();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			request.setAttribute("msgUpdateReading", "Update thành công");
+			return true;
+		}
+	}
 	
-	public static boolean updateReadingExercise(HttpServletRequest request) throws UnsupportedEncodingException {	
+	private static void updateReadingExercise(String exerciseNameNew, String exerciseNameOld, HttpServletRequest request) {
+		String sqlSetUpdate = "SET SQL_SAFE_UPDATES = 0";	
+		try {
+			PreparedStatement statementSetUpdate = Connect.connectDB().prepareStatement(sqlSetUpdate);
+			statementSetUpdate.execute();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String sql = "update reading_exercise set exerciseName = ? where exerciseName = ?";
+		try {
+			PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
+			statement.setString(1, exerciseNameNew);
+			statement.setString(2, exerciseNameOld);
+			statement.executeUpdate();
+			request.setAttribute("msgUpdateReading", "Update thành công");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static List<Exercise> getListExercise(HttpServletRequest request) throws UnsupportedEncodingException {	
 		String exerciseNameOld = "";
 		String exerciseNameNew = "";
 		List<Exercise> listExercise = new ArrayList<>();
@@ -63,20 +116,32 @@ public class UpdateReadingExerciseDAO {
 						exerciseNameOld = item.getString("UTF-8");
 					}
 					else if(item.getFieldName().equals("exercise-new")) {
-						if(checkExerciseNameNew(item.getString("UTF-8"), exerciseNameOld)) {
-							exerciseNameNew = item.getString("UTF-8");
+						String test = item.getString("UTF-8");
+						if(checkExerciseNameNew(test, exerciseNameOld)) {
+							exerciseNameNew = item.getString("UTF-8");							
 						}
 						else {
 							request.setAttribute("msgUpdateReading", "Tên bài cần sửa trùng với tên bài trong database");
-							return false;
+							return null;
 						}
 					}
 				}
 				else {
+					
+					if(item.getName().equals("")) {
+						updateReadingExercise(exerciseNameNew, exerciseNameOld, request);
+						return null;
+					}
+					if(!checkFileType(item.getName())) {
+						request.setAttribute("msgUpdateReading", "File không phải định dạng .xls hay .xlsx");
+						return null;
+					}
+					deleteExercise(exerciseNameOld);
 					File uploadFile = new File("E:" + File.separator + "TestUploadFile" + File.separator + item.getName());
 					try {
 						item.write(uploadFile);
-						
+						listExercise = getContent(listExercise, uploadFile, exerciseNameNew);
+						uploadFile.delete();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -87,6 +152,7 @@ public class UpdateReadingExerciseDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return listExercise;
 	}
 	
 	private static boolean checkExerciseNameNew(String exerciseNameNew, String exerciseNameOld) {
@@ -100,13 +166,13 @@ public class UpdateReadingExerciseDAO {
 				statement.setString(1, exerciseNameNew);
 				ResultSet result = statement.executeQuery();
 				if(result.next()) {
-					return true;
+					return false;
 				}
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
 			}
-			return false;
+			return true;
 		}
 	}
 	
@@ -144,5 +210,23 @@ public class UpdateReadingExerciseDAO {
 			e.printStackTrace();
 		}
 		return listExercise;
+	}
+	public static boolean deleteExercise(String exerciseName) {
+		String sql = "delete from reading_exercise where exerciseName = ?";
+		try {
+			PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
+			statement.setString(1, exerciseName);
+			statement.executeUpdate();
+			return true;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	private static boolean checkFileType(String fileName) {
+		Pattern pattern = Pattern.compile(".+\\.xls|.+\\.xlsx");
+		Matcher matcher = pattern.matcher(fileName);
+		return matcher.matches();
 	}
 }

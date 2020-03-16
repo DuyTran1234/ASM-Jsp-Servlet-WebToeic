@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,13 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import BEAN.User;
 import DAO.GetReadingExerciseDAO;
-import DAO.InsertReadingExerciseDAO;
+import DAO.UpdateReadingExerciseDAO;
 
-@WebServlet("/InsertReadingExerciseController")
-public class InsertReadingExerciseController extends HttpServlet {
+@WebServlet("/DeleteReadingExerciseController")
+public class DeleteReadingExerciseController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public InsertReadingExerciseController() {
+       
+    public DeleteReadingExerciseController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,12 +27,19 @@ public class InsertReadingExerciseController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		request.setCharacterEncoding("UTF-8");
+	    response.setCharacterEncoding("UTF-8");
+	    response.setContentType("text/html; charset=UTF-8");
 		User user = new User();
+		HttpSession session = request.getSession(false);
 		user = (User)session.getAttribute("sessionUser");
 		if(user != null && user.getUserTypeID() == 1) {
-			if(!InsertReadingExerciseDAO.insertReadingExercise(request)) {
-				request.setAttribute("msgInsertReadingExercise", "Upload thất bại");
+			String exerciseName = request.getParameter("exerciseNameDelete");
+			if(UpdateReadingExerciseDAO.deleteExercise(exerciseName)) {
+				request.setAttribute("msgDeleteReading", "Xoá bài tập thành công");
+			}
+			else {
+				request.setAttribute("msgDeleteReading", "Xoá bài tập thất bại");
 			}
 			String valueJSON = GetReadingExerciseDAO.getValueJSON();
 			String nameJSON = GetReadingExerciseDAO.getNameJSON();

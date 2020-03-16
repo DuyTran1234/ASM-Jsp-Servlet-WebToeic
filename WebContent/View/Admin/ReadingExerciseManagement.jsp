@@ -77,11 +77,22 @@
 								<input type="text" id="exercise-old-ajax"><br><br>
 								<input type="button" value="Sửa" class="btn btn-primary btn-lg px-5" onclick="updateExerciseAjax()">
 							</div>
-							
+							<div class="col-md-12 form-group">
+								<p style="color:red"><%=request.getAttribute("msgUpdateReading")!=null? request.getAttribute("msgUpdateReading") : ""%></p>
+							</div>
 							<div class="col-md-12 form-group">
 								<div id="update-exercise-ajax"></div>
 							</div>										
                 			
+                			<div class="col-md-12 form-group">
+                				<form action="DeleteReadingExerciseController" method="POST">
+                					<h5>Xoá bài tập: </h5>
+                					<p>Nhập tên bài cần xoá: </p>
+                					<input type="text" name="exerciseNameDelete"><br>
+                					<input type="submit" value="Xoá" class="btn btn-primary btn-lg px-5">
+                				</form>
+                				<p style="color:red"><%=request.getAttribute("msgDeleteReading")!=null? request.getAttribute("msgDeleteReading") : "" %></p>           				
+                			</div>
                 			
                 		</div>
 					</div>
