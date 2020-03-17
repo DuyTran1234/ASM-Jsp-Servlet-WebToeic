@@ -88,7 +88,7 @@
                 				<form action="DeleteReadingExerciseController" method="POST">
                 					<h5>Xoá bài tập: </h5>
                 					<p>Nhập tên bài cần xoá: </p>
-                					<input type="text" name="exerciseNameDelete"><br>
+                					<input type="text" name="exerciseNameDelete"><br><br>
                 					<input type="submit" value="Xoá" class="btn btn-primary btn-lg px-5">
                 				</form>
                 				<p style="color:red"><%=request.getAttribute("msgDeleteReading")!=null? request.getAttribute("msgDeleteReading") : "" %></p>           				

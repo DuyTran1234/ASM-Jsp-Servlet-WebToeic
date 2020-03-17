@@ -94,9 +94,12 @@
                         </div>
                         <br>
                         <div class="row">
-	                        <div class="col-12">
-	                            <input type="submit" value="Quản lý bài tập nghe" class="btn btn-primary btn-lg px-5">
-	                        </div>
+                        	<form action="ListeningExerciseForward" method="GET" target="_blank">
+                        		<div class="col-12">
+	                           		<input type="submit" value="Quản lý bài tập nghe" class="btn btn-primary btn-lg px-5">
+	                        	</div>
+                        	</form>
+	                        
                         </div>
                         <br>
                         <div class="row">
