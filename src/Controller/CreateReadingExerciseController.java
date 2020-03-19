@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BEAN.User;
+import DAO.CreateListeningExerciseDAO;
 
 @WebServlet("/CreateReadingExerciseController")
 public class CreateReadingExerciseController extends HttpServlet {
@@ -31,7 +32,8 @@ public class CreateReadingExerciseController extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		user = (User)session.getAttribute("sessionUser");
 		if(user != null && user.getUserTypeID() == 1) {
-			
+			CreateListeningExerciseDAO.insertListeningExercise(request);
+			request.getRequestDispatcher("/View/Admin/ListeningExerciseManagement.jsp").forward(request, response);
 		}
 		else {
 			request.getRequestDispatcher("/View/Home.jsp").forward(request, response);

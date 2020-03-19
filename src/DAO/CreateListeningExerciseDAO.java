@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +35,47 @@ public class CreateListeningExerciseDAO {
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
+	}
+	@SuppressWarnings("unused")
+	public static boolean insertListeningExercise(HttpServletRequest request) {
+		try {
+			List<ListeningExercise> listExercise = createListeningExercise(request);
+			if(listExercise == null) {
+				request.setAttribute("msgCreateListening", "Tạo thất bại, vui lòng kiểm tra lại file mp3");
+				return false;
+			}
+			if(checkExistsExercise(listExercise.get(0).getExerciseName())) {
+				request.setAttribute("msgCreateListening", "Tồn tại tên bài tập trong cơ sở dữ liệu");
+				return false;
+			}
+			for(int i = 0; i < listExercise.size(); i++) {
+				String sql = "insert into listening_exercise(exerciseName,questionID,questionContent,optionA,optionB,optionC,optionD,result,date,path) values(?,?,?,?,?,?,?,?,?,?)";
+				try {
+					PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
+					statement.setString(1, listExercise.get(i).getExerciseName());
+					statement.setString(2, listExercise.get(i).getQuestionID());
+					statement.setString(3, listExercise.get(i).getQuestionContent());
+					statement.setString(4, listExercise.get(i).getOptionA());
+					statement.setString(5, listExercise.get(i).getOptionB());
+					statement.setString(6, listExercise.get(i).getOptionC());
+					statement.setString(7, listExercise.get(i).getOptionD());
+					statement.setString(8, listExercise.get(i).getResult());
+					statement.setString(9, listExercise.get(i).getDate());
+					statement.setString(10, listExercise.get(i).getPath());
+					statement.executeUpdate();
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+				request.setAttribute("msgCreateListening", "Tạo bài tập thành công");
+				return true;
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("msgCreateListening", "Tạo bài tập thất bại");
 		return false;
 	}
 	public static List<ListeningExercise> createListeningExercise(HttpServletRequest request) throws UnsupportedEncodingException {
@@ -60,10 +103,6 @@ public class CreateListeningExerciseDAO {
 				if(item.isFormField()) {
 					if(item.getFieldName().equals("exercise-listening-name")) {
 						exerciseName = item.getString("UTF-8");
-						if(checkExistsExercise(exerciseName)) {
-							request.setAttribute("msgCreateListening", "Tồn tại tên bài tập trong database");
-							return null;
-						}
 					}
 					else if(item.getFieldName().equals("question-id")) {
 						listQuestionId.add(item.getString("UTF-8"));
@@ -88,8 +127,11 @@ public class CreateListeningExerciseDAO {
 					}
 				}
 				else {
+					if(checkFileType(item.getName())) {
+						return null;
+					}
 					String path = "E:" + File.separator + "TestUploadFile";
-					String fileName = item.getName() + Math.abs(new Random().nextInt()) + new Date().getTime();
+					String fileName = Math.abs(new Random().nextInt()) + new Date().getTime() + item.getName();
 					File file = new File(path + File.separator + fileName);
 					listFileName.add(fileName);
 					try {
@@ -119,6 +161,11 @@ public class CreateListeningExerciseDAO {
 			e.printStackTrace();
 			return null;
 		}
-		
+		return listExercise;
+	}
+	private static boolean checkFileType(String fileName) {
+		Pattern pattern = Pattern.compile(".+\\.mp3");
+		Matcher matcher = pattern.matcher(fileName);
+		return matcher.matches();
 	}
 }

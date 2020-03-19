@@ -53,8 +53,9 @@
 									</table>
 									<br>
 									<input id="addFileListening" type="button" value="Add Question"/><br><br>
-									<input type="submit" value="Tạo" class="btn btn-primary btn-lg px-5">
+									<input type="submit" value="Tạo" class="btn btn-primary btn-lg px-5">								
 	                			</form>
+	                			<p style="color:red"><%=request.getAttribute("msgCreateListening")!=null? request.getAttribute("msgCreateListening") : "" %></p>
                 			</div>              
                 			              		           		
                 		</div>
