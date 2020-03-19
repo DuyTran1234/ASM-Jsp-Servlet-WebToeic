@@ -12,8 +12,8 @@ public class Exercise {
 	private String optionB = null;
 	private String optionC = null;
 	private String optionD = null;
-	private String result;
-	private String date;
+	private String result = null;
+	private String date = null;
 	private String exerciseNameOld = null;
 	
 	public String getExerciseNameOld() {

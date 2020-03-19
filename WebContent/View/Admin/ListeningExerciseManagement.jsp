@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <script src="./bootstrap4/js/jquery.min.js"></script>
+<meta charset="UTF-8">
 <title>Quản lý bài tập nghe</title>
 </head>
 <body>
@@ -19,18 +19,48 @@
                 	
                 		<div class="row">              		
                 			<div class="col-md-12 form-group">
-                				<h5>Tạo bài tập mới:</h5>
-                				<p>Nhập tên bài tập cần tạo:</p>
-                				<input type="text" id="listening-exercise-new"><br><br>
-                				<input type="button" class="btn btn-primary btn-lg px-5" onclick="createListeningExercise()">
-                			</div>
-                			<div class="col-md-12 form-group">
-                				<div id="create-listening-exercise-ajax"></div>
-                			</div>               		           		
+                				<form action="CreateReadingExerciseController" method="POST" enctype="multipart/form-data">
+	                				<h5>Tạo bài tập mới:</h5>
+	                				<p>Nhập tên bài tập cần tạo:</p>
+	                				<input type="text" id="listening-exercise-new" name="exercise-listening-name">
+	                				<input type="button" value="Kiểm tra" class="btn btn-primary btn-lg px-5" onclick="createListeningExercise()">
+	                				<p id="create-listening-exercise-ajax"></p>
+	                				<table id="fileTableListening">
+										<tr>
+											<td>
+												<p>Nhập questionID:</p>
+												<input type="text" name="question-id">
+												<p>Nhập questionContent: </p>
+												<input type="text" name="question-content">
+												<p>Nhập optionA:</p>
+												<input type="text" name="optionA" value="A. ">
+												<p>Nhập optionB:</p>
+												<input type="text" name="optionB" value="B. ">
+												<p>Nhập optionC:</p>
+												<input type="text" name="optionC" value="C. ">
+												<p>Nhập optionD:</p>
+												<input type="text" name="optionD" value="D. ">
+												<p>Nhập result: </p>
+												<input type="text" name="result">
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p>Chọn file nghe (*chỉ sử dụng file có định dạng .mp3)</p>
+												<input type="file" name="files"><br><br><br>		
+											</td>
+										</tr>									
+									</table>
+									<br>
+									<input id="addFileListening" type="button" value="Add Question"/><br><br>
+									<input type="submit" value="Tạo" class="btn btn-primary btn-lg px-5">
+	                			</form>
+                			</div>              
+                			              		           		
                 		</div>
               		
                 		<div class="row">
-                		
+                			
                 		</div>
                 		
                 	</div>
@@ -57,6 +87,46 @@
     		xhttp.send();
     	}
     </script>
+    
+	<script>
+    $(document)
+            .ready(
+                    function() {
+                        //add more file components if Add is clicked
+                        $('#addFileListening')
+                                .click(
+                                        function() {
+                                            var fileIndex = $('#fileTableListening tr')
+                                                    .children().length - 1;
+                                            $('#fileTableListening')
+                                                    .append('<tr>' +
+        											'<td>' +
+    												'<p>Nhập questionID:</p>' +
+    												'<input type="text" name="question-id">' +
+    												'<p>Nhập questionContent: </p>' +
+    												'<input type="text" name="question-content">' +
+    												'<p>Nhập optionA:</p>' +
+    												'<input type="text" name="optionA" value="A. ">' +
+    												'<p>Nhập optionB:</p>' +
+    												'<input type="text" name="optionB" value="B. ">' +
+    												'<p>Nhập optionC:</p>' +
+    												'<input type="text" name="optionC" value="C. ">' +
+    												'<p>Nhập optionD:</p>' +
+    												'<input type="text" name="optionD" value="D. ">' +
+    												'<p>Nhập result: </p>' +
+    												'<input type="text" name="result">' +
+    											'</td>' +
+    										'</tr>' +
+    										'<tr>' +
+        										'<td>' +
+        											'<p>Chọn file nghe (*chỉ sử dụng file có định dạng .mp3)</p>' +
+        											'<input type="file" name="files"><br><br><br>' +	
+        										'</td>' +
+        									'</tr>');
+                                        });
+ 
+                    });
+	</script>
 	
 	<jsp:include page="/View/Footer.jsp"></jsp:include>
 </body>
