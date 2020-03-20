@@ -25,39 +25,14 @@
 	                				<input type="text" id="listening-exercise-new" name="exercise-listening-name">
 	                				<input type="button" value="Kiểm tra" class="btn btn-primary btn-lg px-5" onclick="createListeningExercise()">
 	                				<p id="create-listening-exercise-ajax"></p>
-	                				<table id="fileTableListening">
-										<tr>
-											<td>
-												<p>Nhập questionID:</p>
-												<input type="text" name="question-id">
-												<p>Nhập questionContent: </p>
-												<input type="text" name="question-content">
-												<p>Nhập optionA:</p>
-												<input type="text" name="optionA" value="A. ">
-												<p>Nhập optionB:</p>
-												<input type="text" name="optionB" value="B. ">
-												<p>Nhập optionC:</p>
-												<input type="text" name="optionC" value="C. ">
-												<p>Nhập optionD:</p>
-												<input type="text" name="optionD" value="D. ">
-												<p>Nhập result: </p>
-												<input type="text" name="result">
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p>Chọn file nghe (*chỉ sử dụng file có định dạng .mp3)</p>
-												<input type="file" name="files"><br><br><br>		
-											</td>
-										</tr>									
+	                				<table id="fileTableListening">																											
 									</table>
 									<br>
 									<input id="addFileListening" type="button" value="Add Question"/><br><br>
 									<input type="submit" value="Tạo" class="btn btn-primary btn-lg px-5">								
 	                			</form>
-	                			<p style="color:red"><%=request.getAttribute("msgCreateListening")!=null? request.getAttribute("msgCreateListening") : "" %></p>
-                			</div>              
-                			              		           		
+	                			<p style="color:red"><%=request.getAttribute("msgCreateListening")!=null? request.getAttribute("msgCreateListening") : "" %></p>                				
+                			</div>                        			              		           		
                 		</div>
               		
                 		<div class="row">
@@ -98,7 +73,7 @@
                                 .click(
                                         function() {
                                             var fileIndex = $('#fileTableListening tr')
-                                                    .children().length - 1;
+                                                    .children().length;
                                             $('#fileTableListening')
                                                     .append('<tr>' +
         											'<td>' +
@@ -116,14 +91,10 @@
     												'<input type="text" name="optionD" value="D. ">' +
     												'<p>Nhập result: </p>' +
     												'<input type="text" name="result">' +
-    											'</td>' +
-    										'</tr>' +
-    										'<tr>' +
-        										'<td>' +
-        											'<p>Chọn file nghe (*chỉ sử dụng file có định dạng .mp3)</p>' +
+    												'<p>Chọn file nghe (*chỉ sử dụng file có định dạng .mp3)</p>' +
         											'<input type="file" name="files"><br><br><br>' +	
-        										'</td>' +
-        									'</tr>');
+    											'</td>' +
+    										'</tr>');
                                         });
  
                     });

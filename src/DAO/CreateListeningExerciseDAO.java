@@ -41,6 +41,10 @@ public class CreateListeningExerciseDAO {
 	public static boolean insertListeningExercise(HttpServletRequest request) {
 		try {
 			List<ListeningExercise> listExercise = createListeningExercise(request);
+			if(listExercise.size() == 0) {
+				request.setAttribute("msgCreateListening", "Tạo bài tập thất bại, chưa thêm câu hỏi");
+				return false;
+			}
 			if(listExercise == null) {
 				request.setAttribute("msgCreateListening", "Tạo thất bại, vui lòng kiểm tra lại file mp3");
 				return false;
@@ -68,9 +72,9 @@ public class CreateListeningExerciseDAO {
 				catch(SQLException e) {
 					e.printStackTrace();
 				}
-				request.setAttribute("msgCreateListening", "Tạo bài tập thành công");
-				return true;
 			}
+			request.setAttribute("msgCreateListening", "Tạo bài tập thành công");
+			return true;
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +82,7 @@ public class CreateListeningExerciseDAO {
 		request.setAttribute("msgCreateListening", "Tạo bài tập thất bại");
 		return false;
 	}
-	public static List<ListeningExercise> createListeningExercise(HttpServletRequest request) throws UnsupportedEncodingException {
+	public static List<ListeningExercise> createListeningExercise(HttpServletRequest request) throws UnsupportedEncodingException {	
 		List<ListeningExercise> listExercise = new ArrayList<>();
 		String exerciseName = null;
 		List<String> listQuestionId = new ArrayList<>();
@@ -100,11 +104,11 @@ public class CreateListeningExerciseDAO {
 			Iterator<FileItem> iterator = items.iterator();
 			while(iterator.hasNext()) {
 				FileItem item = iterator.next();
-				if(item.isFormField()) {
-					if(item.getFieldName().equals("exercise-listening-name")) {
-						exerciseName = item.getString("UTF-8");
-					}
-					else if(item.getFieldName().equals("question-id")) {
+				if(item.getFieldName().equals("exercise-listening-name")) {
+					exerciseName = item.getString("UTF-8");
+				}
+				if(item.isFormField()) {						
+					if(item.getFieldName().equals("question-id")) {
 						listQuestionId.add(item.getString("UTF-8"));
 					}
 					else if(item.getFieldName().equals("question-content")) {
@@ -127,7 +131,7 @@ public class CreateListeningExerciseDAO {
 					}
 				}
 				else {
-					if(checkFileType(item.getName())) {
+					if(!checkFileType(item.getName())) {
 						return null;
 					}
 					String path = "E:" + File.separator + "TestUploadFile";
@@ -142,24 +146,24 @@ public class CreateListeningExerciseDAO {
 					}
 				}
 			}
-			for(int i = 0; i < listQuestionId.size(); i++) {
-				ListeningExercise exercise = new ListeningExercise();
-				exercise.setExerciseName(exerciseName);
-				exercise.setQuestionID(listQuestionId.get(i));
-				exercise.setQuestionContent(listQuestionContent.get(i));
-				exercise.setOptionA(listOptionA.get(i));
-				exercise.setOptionB(listOptionB.get(i));
-				exercise.setOptionC(listOptionC.get(i));
-				exercise.setOptionD(listOptionD.get(i));
-				exercise.setResult(listResult.get(i));
-				exercise.setDate();
-				exercise.setPath(listFileName.get(i));
-				listExercise.add(exercise);
-			}
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
+		}
+		for(int i = 0; i < listQuestionId.size(); i++) {
+			ListeningExercise exercise = new ListeningExercise();
+			exercise.setExerciseName(exerciseName);
+			exercise.setQuestionID(listQuestionId.get(i));
+			exercise.setQuestionContent(listQuestionContent.get(i));
+			exercise.setOptionA(listOptionA.get(i));
+			exercise.setOptionB(listOptionB.get(i));
+			exercise.setOptionC(listOptionC.get(i));
+			exercise.setOptionD(listOptionD.get(i));
+			exercise.setResult(listResult.get(i));
+			exercise.setDate();
+			exercise.setPath(listFileName.get(i));
+			listExercise.add(exercise);
 		}
 		return listExercise;
 	}
