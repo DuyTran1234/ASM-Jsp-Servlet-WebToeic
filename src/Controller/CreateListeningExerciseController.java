@@ -11,11 +11,11 @@ import javax.servlet.http.HttpSession;
 import BEAN.User;
 import DAO.CreateListeningExerciseDAO;
 
-@WebServlet("/CreateReadingExerciseController")
-public class CreateReadingExerciseController extends HttpServlet {
+@WebServlet("/CreateListeningExerciseController")
+public class CreateListeningExerciseController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public CreateReadingExerciseController() {
+    public CreateListeningExerciseController() {
         super();
         // TODO Auto-generated constructor stub
     }

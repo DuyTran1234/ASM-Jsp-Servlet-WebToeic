@@ -41,12 +41,12 @@ public class CreateListeningExerciseDAO {
 	public static boolean insertListeningExercise(HttpServletRequest request) {
 		try {
 			List<ListeningExercise> listExercise = createListeningExercise(request);
-			if(listExercise.size() == 0) {
-				request.setAttribute("msgCreateListening", "Tạo bài tập thất bại, chưa thêm câu hỏi");
-				return false;
-			}
 			if(listExercise == null) {
 				request.setAttribute("msgCreateListening", "Tạo thất bại, vui lòng kiểm tra lại file mp3");
+				return false;
+			}		
+			if(listExercise.size() == 0) {
+				request.setAttribute("msgCreateListening", "Tạo bài tập thất bại, chưa thêm câu hỏi");
 				return false;
 			}
 			if(checkExistsExercise(listExercise.get(0).getExerciseName())) {

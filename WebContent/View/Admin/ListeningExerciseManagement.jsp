@@ -17,9 +17,20 @@
             	<div class="row justify-content-center">           		
                 	<div class="col-md-5">
                 	
+                		<div class="row">
+                			<div class="col-md-12 form-group">
+                				<form method="post" action="DisplayListeningExerciseForward" target="_blank">
+                					<input type="submit" value="Xem danh sách bài tập" class="btn btn-primary btn-lg px-5">
+                				</form>
+                				<div>
+                					<h5 style="color:red"><%=request.getAttribute("msgError")!=null? request.getAttribute("msgError") : ""%></h5>
+                				</div>
+                			</div>
+                		</div>
+                	
                 		<div class="row">              		
                 			<div class="col-md-12 form-group">
-                				<form action="CreateReadingExerciseController" method="POST" enctype="multipart/form-data">
+                				<form action="CreateListeningExerciseController" method="POST" enctype="multipart/form-data">
 	                				<h5>Tạo bài tập mới:</h5>
 	                				<p>Nhập tên bài tập cần tạo:</p>
 	                				<input type="text" id="listening-exercise-new" name="exercise-listening-name">
@@ -36,7 +47,10 @@
                 		</div>
               		
                 		<div class="row">
-                			
+                			<div class="col-md-12 form-group">
+                				<h5>Sửa bài tập:</h5>
+                				<p>Nhập tên bài tập:</p>
+                			</div>
                 		</div>
                 		
                 	</div>
