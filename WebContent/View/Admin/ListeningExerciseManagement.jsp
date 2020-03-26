@@ -1,11 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <script src="./bootstrap4/js/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Quản lý bài tập nghe</title>
+    
+    <script>
+    	function searchExercise() {
+    		var xhttp = new XMLHttpRequest();
+    		var exerciseName = document.getElementById("exercise-name-edit").value;		
+    		var url = "SearchExerciseAjaxController?exerciseName=" + exerciseName;
+    		if(exerciseName != "") {
+    			xhttp.onreadystatechange = function() {
+        			if(this.readyState == 4 && this.status == 200) {
+        				document.getElementById("search-exercise-ajax").innerHTML = this.responseText;
+        			}
+        		};
+        		xhttp.open("POST", url, true);
+        		xhttp.send();
+    		}
+    		else {
+    			document.getElementById("search-exercise-ajax").innerHTML = "";
+    		}
+    	}
+    </script>
 </head>
 <body>
 	<jsp:include page="/View/Header.jsp"></jsp:include>
@@ -49,7 +70,9 @@
                 		<div class="row">
                 			<div class="col-md-12 form-group">
                 				<h5>Sửa bài tập:</h5>
-                				<p>Nhập tên bài tập:</p>
+	                			<p>Nhập tên bài tập:</p>
+	                			<input type="text" id="exercise-name-edit" onkeyup="searchExercise()"><br><br>	             			
+	                			<div id="search-exercise-ajax"></div> 	                				              				           				       				
                 			</div>
                 		</div>
                 		
@@ -77,6 +100,7 @@
     		xhttp.send();
     	}
     </script>
+
     
 	<script>
     $(document)
