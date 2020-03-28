@@ -27,6 +27,26 @@
     		}
     	}
     </script>
+    
+    <script>
+    	function deleteListeningExercise() {
+    		var xhttp = new XMLHttpRequest();
+    		var listeningExerciseName = document.getElementById("delete-exercise").value;
+    		var url = "DeleteListeningExerciseAjax?listeningExerciseName=" + listeningExerciseName;
+    		if(listeningExerciseName != "") {
+    			xhttp.onreadystatechange = function() {
+        			if(this.readyState == 4 && this.status == 200) {
+        				document.getElementById("list-delete-exercise-ajax").innerHTML = this.responseText;
+        			}
+        		};
+        		xhttp.open("POST", url, true);
+        		xhttp.send();
+    		}
+    		else {
+    			document.getElementById("list-delete-exercise-ajax").innerHTML = "";
+    		}
+    	}
+    </script>
 </head>
 <body>
 	<jsp:include page="/View/Header.jsp"></jsp:include>
@@ -80,7 +100,8 @@
                 			<div class="col-md-12 form-group">
                 				<h5>Xoá bài tập:</h5>
                 				<p>Nhập tên bài tập:</p>
-                				<input type="text" id="delete-exercise" onkeyup="">
+                				<input type="text" id="delete-exercise" onkeyup="deleteListeningExercise()">
+                				<div id="list-delete-exercise-ajax"></div>
                 			</div>
                 		</div>
                 	</div>
@@ -93,11 +114,7 @@
     <script src="./bootstrap4/js/bootstrap.min.js"></script>
     <script src="./bootstrap4/js/jquery.twbsPagination.js" type="text/javascript"></script>
     
-    <script>
-    	function deleteListeningExercise() {
-    		
-    	}
-    </script>
+    
     
     <script>
     	function createListeningExercise() {
