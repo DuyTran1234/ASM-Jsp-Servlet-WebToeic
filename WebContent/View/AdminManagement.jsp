@@ -94,7 +94,7 @@
                         </div>
                         <br>
                         <div class="row">
-                        	<form action="ListeningExerciseForward" method="GET" target="_blank">
+                        	<form action="ListeningExerciseForward" method="POST" target="_blank">
                         		<div class="col-12">
 	                           		<input type="submit" value="Quản lý bài tập nghe" class="btn btn-primary btn-lg px-5">
 	                        	</div>

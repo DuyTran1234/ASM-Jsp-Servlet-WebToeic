@@ -21,7 +21,8 @@
 <title>Sửa bài tập nghe</title>
 </head>
 <body>
-	<form enctype="multipart/form-data" method="post" action="UpdateListeningExerciseController">
+	<h2>${listeningExerciseName}</h2>
+	<form enctype="multipart/form-data" method="post" action="UpdateListeningExerciseController?exerciseNameListen=${listeningExerciseName}">
 		<table>
 			<tr>
 				<th>exerciseID</th>
@@ -40,7 +41,7 @@
 			<c:forEach items="${listListeningExercise}" var="value">
 				<tr>
 					<td><input type="text" name="exerciseID" value="${value.getExerciseID()}" readonly></td>
-					<td><input type="text" name="exerciseName" value="${value.getExerciseName()}" readonly></td>
+					<td><input type="text" name="exerciseName" value="${value.getExerciseName()}"></td>
 					<td><input type="text" name="questionID" value="${value.getQuestionID()}"></td>
 					<td><input type="text" name="questionContent" value="${value.getQuestionContent()}"></td>
 					<td><input type="text" name="optionA" value="${value.getOptionA()}"></td>

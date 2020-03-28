@@ -35,6 +35,7 @@ public class UpdateListeningExerciseForward extends HttpServlet {
 			String exerciseListeningName = request.getParameter("exerciseListen");
 			ArrayList<ListeningExercise> list = GetListeningExerciseDAO.getExerciseBasedName(exerciseListeningName);
 			request.setAttribute("listListeningExercise", list);
+			request.setAttribute("listeningExerciseName", exerciseListeningName);
 			request.getRequestDispatcher("/View/Admin/UpdateListeningExercise.jsp").forward(request, response);
 		}
 		else {

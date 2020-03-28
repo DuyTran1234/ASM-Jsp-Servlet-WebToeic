@@ -39,10 +39,12 @@ public class UpdateListeningExerciseController extends HttpServlet {
 		if(user != null && user.getUserTypeID() == 1) {
 			ArrayList<ListeningExercise> list = UpdateListeningExerciseDAO.getListExerciseUpdate(request);
 			UpdateListeningExerciseDAO.updateListeningExerciseDatabase(request, list);
-			String name = list.get(0).getExerciseName();
-			
+			String name = request.getParameter("exerciseNameListen");
+				
 			ArrayList<ListeningExercise> listExercise = GetListeningExerciseDAO.getExerciseBasedName(name);
+			
 			request.setAttribute("listListeningExercise", listExercise);
+			request.setAttribute("listeningExerciseName", name);
 			request.getRequestDispatcher("/View/Admin/UpdateListeningExercise.jsp").forward(request, response);
 		}
 		else {
