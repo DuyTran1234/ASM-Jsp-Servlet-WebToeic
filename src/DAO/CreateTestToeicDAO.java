@@ -2,6 +2,8 @@ package DAO;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -18,6 +20,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import BEAN.TestToeic;
+import DB.Connect;
 
 public class CreateTestToeicDAO {
 	public static void insertTestToeicDatabase(HttpServletRequest request) throws UnsupportedEncodingException {
@@ -26,7 +29,28 @@ public class CreateTestToeicDAO {
 			return;
 		}
 		else {
-			
+			for(int i = 0; i < list.size(); i++) {
+				TestToeic toeic = list.get(i);
+				String sql = "insert into test_toeic(testToeicName,questionID,questionContent,optionA,optionB,optionC,optionD,result,date,path) values(?,?,?,?,?,?,?,?,?,?)";
+				try {
+					PreparedStatement statement = Connect.connectDB().prepareStatement(sql);
+					statement.setString(1, toeic.getTestToeicName());
+					statement.setString(2, toeic.getQuestionID());
+					statement.setString(3, toeic.getQuestionContent());
+					statement.setString(4, toeic.getOptionA());
+					statement.setString(5, toeic.getOptionB());
+					statement.setString(6, toeic.getOptionC());
+					statement.setString(7, toeic.getOptionD());
+					statement.setString(8, toeic.getResult());
+					statement.setString(9, toeic.getDate());
+					statement.setString(10, toeic.getPath());
+					statement.executeUpdate();
+				}
+				catch(SQLException e) {
+					request.setAttribute("msgDB", "Lỗi kết nối database");
+				}
+			}
+			request.setAttribute("msgDB", "Tạo thành công");
 		}
 	}
 	
@@ -55,6 +79,10 @@ public class CreateTestToeicDAO {
 				if(item.isFormField()) {
 					if(item.getFieldName().equals("test-toeic-name-upload")) {
 						testToeicName = item.getString("UTF-8");
+						if(CheckTestToeicNameDAO.checkTestToeicName(testToeicName, request)) {
+							request.setAttribute("msgTestToeicName", "Tồn tại tên đề thi trong cơ sở dữ liệu");
+							return null;
+						}
 					}
 					else if(item.getFieldName().equals("questionID")) {
 						listQuestionID.add(item.getString("UTF-8"));

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import BEAN.User;
 import DAO.CheckSessionDAO;
+import DAO.CreateTestToeicDAO;
 
 @WebServlet("/CreateTestToeicController")
 public class CreateTestToeicController extends HttpServlet {
@@ -29,7 +30,8 @@ public class CreateTestToeicController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		User user = CheckSessionDAO.checkSession(request);
 		if(user != null && user.getUserTypeID() == 1) {
-			
+			CreateTestToeicDAO.insertTestToeicDatabase(request);
+			request.getRequestDispatcher("/View/Admin/CreateTestToeic.jsp").forward(request, response);
 		}
 		else {
 			request.getRequestDispatcher("/View/Home.jsp").forward(request, response);

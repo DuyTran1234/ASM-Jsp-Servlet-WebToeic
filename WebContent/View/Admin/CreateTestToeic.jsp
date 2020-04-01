@@ -44,6 +44,11 @@
 		<br><br><br>
 		<input type="submit" value="Tạo đề thi">
 	</form>
+	<p style="color:red"><%=request.getAttribute("msgDB")!=null?request.getAttribute("msgDB"):"" %></p>
+	<p style="color:red"><%=request.getAttribute("msgPatternFile")!=null?request.getAttribute("msgPatternFile"):"" %></p>
+	<p style="color:red"><%=request.getAttribute("msgWriteFile")!=null?request.getAttribute("msgWriteFile"):"" %></p>
+	<p style="color:red"><%=request.getAttribute("msgTestToeicName")!=null?request.getAttribute("msgTestToeicName"):"" %></p>
+	<p style="color:red"><%=request.getAttribute("msgFileUpload")!=null?request.getAttribute("msgFileUpload"):"" %></p>
 	
 	<!-- Script -->
 	<script>
