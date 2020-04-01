@@ -104,7 +104,9 @@
                         <br>
                         <div class="row">
 	                        <div class="col-12">
-	                            <input type="submit" value="Quản lý đề thi Toeic" class="btn btn-primary btn-lg px-5">
+	                            <form action="TestToeicForward" method="POST" target="_blank">
+	                            	<input type="submit" value="Quản lý đề thi Toeic" class="btn btn-primary btn-lg px-5">
+	                            </form>
 	                        </div>
                         </div>
                         

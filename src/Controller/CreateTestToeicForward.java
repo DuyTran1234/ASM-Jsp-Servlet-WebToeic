@@ -1,9 +1,6 @@
 package Controller;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,15 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import BEAN.Exercise;
 import BEAN.User;
-import DAO.GetListeningExerciseDAO;
 
-@WebServlet("/DeleteListeningExerciseAjax")
-public class DeleteListeningExerciseAjax extends HttpServlet {
+@WebServlet("/CreateTestToeicForward")
+public class CreateTestToeicForward extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public DeleteListeningExerciseAjax() {
+    public CreateTestToeicForward() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,10 +31,7 @@ public class DeleteListeningExerciseAjax extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		user = (User)session.getAttribute("sessionUser");
 		if(user != null && user.getUserTypeID() == 1) {
-			String exerciseName = request.getParameter("listeningExerciseName");
-			ArrayList<Exercise> list = GetListeningExerciseDAO.getListSearch(exerciseName);
-			request.setAttribute("listListeningExercise", list);
-			request.getRequestDispatcher("/View/Admin/DeleteListeningExerciseAjaxForward.jsp").forward(request, response);
+			request.getRequestDispatcher("/View/Admin/CreateTestToeic.jsp").forward(request, response);
 		}
 		else {
 			request.getRequestDispatcher("/View/Home.jsp").forward(request, response);

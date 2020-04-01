@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/Controller/CheckTestToeicNameAjax.java=UTF-8
 encoding//src/Controller/DeleteGrammarLessionController.java=UTF-8
 encoding//src/Controller/DeleteReadingExerciseController.java=UTF-8
 encoding//src/Controller/DisplayListeningExerciseForward.java=UTF-8
@@ -8,7 +9,9 @@ encoding//src/Controller/UpdateGrammarLessionController.java=UTF-8
 encoding//src/Controller/UpdateVocabularyLessionController.java=UTF-8
 encoding//src/Controller/UploadGrammarLession.java=UTF-8
 encoding//src/DAO/AddFileGrammarLession.java=UTF-8
+encoding//src/DAO/CheckTestToeicNameDAO.java=UTF-8
 encoding//src/DAO/CreateListeningExerciseDAO.java=UTF-8
+encoding//src/DAO/CreateTestToeicDAO.java=UTF-8
 encoding//src/DAO/InsertReadingExerciseDAO.java=UTF-8
 encoding//src/DAO/InsertVocabularyLessionDAO.java=UTF-8
 encoding//src/DAO/LoginDAO.java=UTF-8
