@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 	<style>
-        table, th{
+        table, th, tr, td{
           border: 1px solid black;
           max-width: 138px;
           max-height: 50px;
