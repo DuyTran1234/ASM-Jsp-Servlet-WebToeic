@@ -12,24 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 import BEAN.TestToeic;
 import BEAN.User;
 import DAO.CheckSessionDAO;
+import DAO.DeleteTestToeicDAO;
 import DAO.GetTestToeicDAO;
 
-@WebServlet("/UpdateTestToeicForward")
-public class UpdateTestToeicForward extends HttpServlet {
+@WebServlet("/DeleteTestToeicAjaxController")
+public class DeleteTestToeicAjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public UpdateTestToeicForward() {
+
+    public DeleteTestToeicAjaxController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		User user = CheckSessionDAO.checkSession(request);
 		if(user != null && user.getUserTypeID() == 1) {
-			String testToeicName = request.getParameter("testToeicNameSearch");
+			int id = Integer.parseInt(request.getParameter("id"));
+			DeleteTestToeicDAO.deleteTestToeic(id);
+			
+			String testToeicName = request.getParameter("testToeicName");
 			List<TestToeic> listTestToeic = GetTestToeicDAO.getListTestToeicBasedName(request, testToeicName);
 			request.setAttribute("testToeicName", testToeicName);
 			request.setAttribute("listTestToeic", listTestToeic);
@@ -38,11 +45,6 @@ public class UpdateTestToeicForward extends HttpServlet {
 		else {
 			request.getRequestDispatcher("/View/Home.jsp").forward(request, response);
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

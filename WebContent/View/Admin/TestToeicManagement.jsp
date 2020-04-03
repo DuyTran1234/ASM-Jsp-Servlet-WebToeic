@@ -37,13 +37,10 @@
                 		
                 		<div class="row">
                 			<div class="col-md-12 form-group">
-                				<form action="" method="post" target="_blank">
-                					<h5>Cập nhật đề thi</h5>
-                					<p>Nhập tên đề thi:</p>
-                					<input type="text" id="test-toeic-name-update" onkeyup="searchTestToeic()">
-                					<div id="result-search-ajax"></div><br>
-                					<input type="submit" value="Cập nhật đề thi" class="btn btn-primary btn-lg px-5">
-                				</form>
+                           		<h5>Cập nhật đề thi</h5>
+                				<p>Nhập tên đề thi:</p>
+                				<input type="text" id="test-toeic-name-update" onkeyup="searchTestToeic()">
+                				<div id="result-search-ajax"></div><br>              				            			
                 			</div>
                 		</div>
                 		

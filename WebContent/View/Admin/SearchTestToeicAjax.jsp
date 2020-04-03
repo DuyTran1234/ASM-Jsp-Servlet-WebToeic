@@ -10,7 +10,7 @@
 <body>
 	<% if(request.getAttribute("listNameTestToeic") != null) { %>
 		<c:forEach items="${listNameTestToeic}" var="value">
-			<a href="UpdateTestToeicForward?testToeicName=${value}">${value}</a>
+			<a target="_blank" href="UpdateTestToeicForward?testToeicNameSearch=${value}">${value}</a><br>
 		</c:forEach>
 	<%} else { %>
 		<p>Không tìm thấy đề thi</p>

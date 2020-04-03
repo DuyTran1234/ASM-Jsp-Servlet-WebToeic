@@ -112,7 +112,7 @@ public class CreateTestToeicDAO {
 				else {
 					Pattern pattern = Pattern.compile(".+\\.mp3");
 					Matcher matcher = pattern.matcher(item.getName());
-					if(!matcher.matches()) {
+					if(!matcher.matches() || !item.getName().equals("")) {
 						request.setAttribute("msgPatternFile", "File không có định dạng mp3, kiểm tra lại danh sách");
 						return null;
 					}
