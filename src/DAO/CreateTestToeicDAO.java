@@ -112,18 +112,23 @@ public class CreateTestToeicDAO {
 				else {
 					Pattern pattern = Pattern.compile(".+\\.mp3");
 					Matcher matcher = pattern.matcher(item.getName());
-					if(!matcher.matches() || !item.getName().equals("")) {
+					if(!matcher.matches() && !item.getName().equals("")) {
 						request.setAttribute("msgPatternFile", "File không có định dạng mp3, kiểm tra lại danh sách");
 						return null;
 					}
-					String fileName = Math.abs(new Random().nextInt()) + new Date().getTime() + item.getName();
-					File file = new File("E:" + File.separator + "TestUploadFile" + File.separator + fileName);
-					try {
-						item.write(file);
-						listPath.add(fileName);
-					} catch (Exception e) {
-						request.setAttribute("msgWriteFile", "Không thể ghi File");
-						return null;
+					if(item.getName().equals("")) {
+						listPath.add(item.getName());
+					}
+					else {
+						String fileName = Math.abs(new Random().nextInt()) + new Date().getTime() + item.getName();
+						File file = new File("E:" + File.separator + "TestUploadFile" + File.separator + fileName);
+						try {
+							item.write(file);
+							listPath.add(fileName);
+						} catch (Exception e) {
+							request.setAttribute("msgWriteFile", "Không thể ghi File");
+							return null;
+						}
 					}
 				}
 			}

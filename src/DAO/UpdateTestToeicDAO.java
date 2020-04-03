@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import DB.Connect;
 
-public class DeleteTestToeicDAO {
+public class UpdateTestToeicDAO {
 	public static void deleteTestToeic(int id) {
 		String sql = "delete from test_toeic where id = ?";
 		try {

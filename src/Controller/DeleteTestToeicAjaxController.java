@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import BEAN.TestToeic;
 import BEAN.User;
 import DAO.CheckSessionDAO;
-import DAO.DeleteTestToeicDAO;
+import DAO.UpdateTestToeicDAO;
 import DAO.GetTestToeicDAO;
 
 @WebServlet("/DeleteTestToeicAjaxController")
@@ -34,7 +34,7 @@ public class DeleteTestToeicAjaxController extends HttpServlet {
 		User user = CheckSessionDAO.checkSession(request);
 		if(user != null && user.getUserTypeID() == 1) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			DeleteTestToeicDAO.deleteTestToeic(id);
+			UpdateTestToeicDAO.deleteTestToeic(id);
 			
 			String testToeicName = request.getParameter("testToeicName");
 			List<TestToeic> listTestToeic = GetTestToeicDAO.getListTestToeicBasedName(request, testToeicName);
