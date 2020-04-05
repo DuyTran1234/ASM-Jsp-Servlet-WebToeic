@@ -21,5 +21,6 @@ encoding//src/DAO/LoginDAO.java=UTF-8
 encoding//src/DAO/RegisterDAO.java=UTF-8
 encoding//src/DAO/UpdateListeningExerciseDAO.java=UTF-8
 encoding//src/DAO/UpdateReadingExerciseDAO.java=UTF-8
+encoding//src/DAO/UpdateTestToeicDAO.java=UTF-8
 encoding//src/DAO/UpdateUserDAO.java=UTF-8
 encoding//src/DAO/UpdateVocabularyLessionDAO.java=UTF-8

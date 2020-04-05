@@ -111,7 +111,11 @@
 </head>
 <body>
 	<div>
-		<h5><%=request.getAttribute("testToeicName")%></h5>
+		<h2>Tên đề thi: <%=request.getAttribute("testToeicName")%></h2>
+		<form action="DeleteAllTestToeicController?testToeicName=${testToeicName}" method="post">
+			<input type="submit" value="Xoá toàn bộ đề thi">
+		</form><br>
+		<form action="EditTestToeicController?testToeicName=${testToeicName}" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th></th>
@@ -128,27 +132,36 @@
 				<th>path</th>
 				<th>File</th>		
 			</tr>
-			<c:forEach items="${listTestToeic}" var="value">
-				<tr>
-					<td><input type="button" value="Xoá" onclick="deleteQuestionTestToeic(${value.getId()})"></td>
-					<td><input type="text" value="${value.getId()}" readonly></td>
-					<td><input type="text" value="${value.getTestToeicName()}" readonly></td>
-					<td><input type="text" value="${value.getQuestionID()}"></td>
-					<td><input type="text" value="${value.getQuestionContent()}"></td>
-					<td><input type="text" value="${value.getOptionA()}"></td>
-					<td><input type="text" value="${value.getOptionB()}"></td>
-					<td><input type="text" value="${value.getOptionC()}"></td>
-					<td><input type="text" value="${value.getOptionD()}"></td>
-					<td><input type="text" value="${value.getResult()}"></td>
-					<td><input type="text" value="${value.getDate()}" readonly></td>
-					<td><input type="text" value="${value.getPath()}" readonly></td>
-					<td><input type="file"></td>
-				</tr>
-			</c:forEach>
+				<c:forEach items="${listTestToeic}" var="value">
+					<tr>
+						<td><input type="button" value="Xoá" onclick="deleteQuestionTestToeic(${value.getId()})"></td>
+						<td><input type="text" name="id" value="${value.getId()}" readonly></td>
+						<td><input type="text" name="testToeicName" value="${value.getTestToeicName()}" readonly></td>
+						<td><input type="text" name="questionID" value="${value.getQuestionID()}"></td>
+						<td><input type="text" name="questionContent" value="${value.getQuestionContent()}"></td>
+						<td><input type="text" name="optionA" value="${value.getOptionA()}"></td>
+						<td><input type="text" name="optionB" value="${value.getOptionB()}"></td>
+						<td><input type="text" name="optionC" value="${value.getOptionC()}"></td>
+						<td><input type="text" name="optionD" value="${value.getOptionD()}"></td>
+						<td><input type="text" name="result" value="${value.getResult()}"></td>
+						<td><input type="text" name="date" value="${value.getDate()}" readonly></td>
+						<td><input type="text" name="path" value="${value.getPath()}" readonly></td>
+						<td><input type="file" name="file-name"></td>
+					</tr>
+				</c:forEach>
+			
 		</table>
+		<p><%=request.getAttribute("msgDatabaseEdit")!=null?request.getAttribute("msgDatabaseEdit"):"" %></p>
+		<p><%=request.getAttribute("msgFileUploadEdit")!=null?request.getAttribute("msgFileUploadEdit"):"" %></p>
+		<p><%=request.getAttribute("msgFileWriteEdit")!=null?request.getAttribute("msgFileWriteEdit"):"" %></p>
+		<p><%=request.getAttribute("msgPatternEdit")!=null?request.getAttribute("msgPatternEdit"):"" %></p>
+		<br><input type="submit" value="Cập nhật">
+		</form>
+		<br><br><br>
 		
 		<h3>Thêm câu hỏi</h3>
-		<form action="" method="POST">
+		<button onclick="tableAppend()">Add Question</button><br><br>
+		<form action="InsertTestToeicQuestionController?testToeicName=${testToeicName}" method="POST" enctype="multipart/form-data">
 			<table id="fileTableInsert">
 				<tr>
 					<th>questionID</th>
@@ -160,9 +173,15 @@
 					<th>result</th>
 					<th>path</th>	
 				</tr>
-			</table>	
+			</table><br>
+			
+			<input type="submit" value="Thêm">
 		</form>
-		<button onclick="tableAppend()">Add Question</button>
+		<p style="color:red"><%=request.getAttribute("msgPattern")!=null?request.getAttribute("msgPattern"):"" %></p>
+		<p style="color:red"><%=request.getAttribute("msgFileWrite")!=null?request.getAttribute("msgFileWrite"):"" %></p>
+		<p style="color:red"><%=request.getAttribute("msgFileUpload")!=null?request.getAttribute("msgFileUpload"):"" %></p>
+		<p style="color:red"><%=request.getAttribute("msgDB")!=null?request.getAttribute("msgDB"):"" %></p>
+		<p style="color:red"><%=request.getAttribute("msgInsert")!=null?request.getAttribute("msgInsert"):"" %></p>
 		<!-- Script -->
 	</div>
 </body>
